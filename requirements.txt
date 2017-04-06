@@ -2,6 +2,11 @@
 # pip can install these libraries automatically by reading this file:
 # pip install -r requirements.txt
 BeautifulSoup==3.2.0
+beautifulsoup4==4.3.2
+ply==3.4
+slimit
+fuzzywuzzy[speedup]
+python-Levenshtein
 Django>=1.11.0,<2.0
 Markdown==2.6.8
 Pillow==4.0.0
