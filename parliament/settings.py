@@ -1,0 +1,76 @@
+
+from default_settings import *
+
+DEBUG = True
+# DEBUG = False
+
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = []
+
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/tmp/debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'parliament.sqlite',                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    },
+}
+
+HANSARD_CACHE_DIR = os.path.join(PROJ_ROOT, 'hansard-cache')
+SITE_URL='http://openparliament.ca'
+
+# You'll need this to allow Google login
+# GOOGLE_CLIENT_ID = "YOUR_ID"
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
+CACHE_MIDDLEWARE_SECONDS = 60 * 60 * 3
+
+# For search to work, you need to have a running instance of Apache Solr
+# (If you just leave this as an invalid URL, the site will work with the
+# exception of search features.)
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr'
+    },
+}
+
+# If uncommented, Solr will be sent an update command whenever new searchable
+# data is added.
+#HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+PARLIAMENT_SEND_EMAIL = False
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = 'verysecretindeed'
